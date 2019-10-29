@@ -7,20 +7,22 @@ import (
 	"github.com/pkg/errors"
 )
 
+type PacketID string
+
 // JitMatrixPacketID - Chunk ID of Jitter Chunk header
-const JitMatrixPacketID = "JMTX"
+const JitMatrixPacketID PacketID = "JMTX"
 
 // JitMatrixLatencyPacketID - Chunk ID of Jitter Chunk header
-const JitMatrixLatencyPacketID = "JMLP"
+const JitMatrixLatencyPacketID PacketID = "JMLP"
 
 // JitMessagePacketID - Chunk ID of Jitter Chunk header
-const JitMessagePacketID = "JMMP"
+const JitMessagePacketID PacketID = "JMMP"
 
 // PacketIDSize - Number of bytes in a Packet ID
 const PacketIDSize = 4
 
 type PacketHeader struct {
-	ID   string
+	ID   PacketID
 	Size uint32
 }
 
@@ -31,7 +33,7 @@ func DecodeJitNetPacketHeader(r io.Reader) (*PacketHeader, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to read chunk id")
 	}
-	header.ID = string(buf)
+	header.ID = PacketID(buf)
 	_, err = io.ReadFull(r, buf)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to read size of next chunk")
