@@ -9,11 +9,12 @@ import (
 func Receive(c net.Conn) {
 	r := bufio.NewReader(c)
 
-	buf := make([]byte, 4)
-	r.Read(buf)
-	chunkID := string(buf)
+	header, err := codec.DecodeJitNetPacketHeader(r)
+	if err != nil {
+		panic(err)
+	}
 
-	switch chunkID {
+	switch header.ID {
 	case codec.JitMatrixPacketID:
 		// TODO: Handle
 	case codec.JitMatrixLatencyPacketID:
