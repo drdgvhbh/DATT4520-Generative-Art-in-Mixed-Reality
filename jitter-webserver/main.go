@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"jitter-webserver/internal"
 	"log"
 	"net"
 )
@@ -16,6 +17,6 @@ func main() {
 		if err != nil {
 			log.Println(err)
 		}
-		c.Close()
+		go internal.Receive(c)
 	}
 }
