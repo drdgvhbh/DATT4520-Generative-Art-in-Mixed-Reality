@@ -2,18 +2,26 @@ package internal
 
 import (
 	"bufio"
-	"io"
-	"jitter-webserver/pkg/jitter/codec"
 	"net"
-
-	"github.com/pkg/errors"
+	"os"
 )
 
 func Receive(c net.Conn) {
 	r := bufio.NewReader(c)
-
+	f, err := os.Create("~/Desktop/max")
+	if err != nil {
+		return
+	}
+	defer f.Close()
 	for {
-		header, err := codec.DecodeJitNetPacketHeader(r)
+		b := make([]byte, 4)
+		n, err := r.Read(b)
+		if err != nil {
+			continue
+		}
+		f.Write(b[:n])
+
+		/* 	header, err := codec.DecodeJitNetPacketHeader(r)
 		if err != nil {
 			panic(err)
 		}
@@ -36,6 +44,6 @@ func Receive(c net.Conn) {
 			// TODO: Handle
 		default:
 			// TODO: Log Warning
-		}
+		} */
 	}
 }
