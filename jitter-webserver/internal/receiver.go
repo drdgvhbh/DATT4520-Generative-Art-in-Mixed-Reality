@@ -6,12 +6,13 @@ import (
 	"jitter-webserver/pkg/jitter/codec"
 	"net"
 
+	"github.com/davecgh/go-spew/spew"
+
 	"github.com/pkg/errors"
 )
 
 func Receive(c net.Conn) {
 	r := bufio.NewReader(c)
-
 	for {
 		header, err := codec.DecodeJitNetPacketHeader(r)
 		if err != nil {
@@ -26,6 +27,7 @@ func Receive(c net.Conn) {
 			}
 			data := make([]byte, packetMatrix.Datasize)
 			_, err = io.ReadFull(r, data)
+			println(spew.Sdump(packetMatrix))
 			if err != nil {
 				panic(errors.Wrap(err, "failed to read data"))
 			}

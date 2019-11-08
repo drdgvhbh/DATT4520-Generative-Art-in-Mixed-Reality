@@ -1,5 +1,6 @@
 package main
 
+/*
 import (
 	"fmt"
 	"jitter-webserver/internal"
@@ -20,3 +21,4 @@ func main() {
 		go internal.Receive(c)
 	}
 }
+*/
