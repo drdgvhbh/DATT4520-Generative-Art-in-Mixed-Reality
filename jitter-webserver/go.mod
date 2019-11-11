@@ -4,5 +4,6 @@ go 1.12
 
 require (
 	github.com/davecgh/go-spew v1.1.1
+	github.com/esimov/pigo v1.3.0
 	github.com/pkg/errors v0.8.1
 )
