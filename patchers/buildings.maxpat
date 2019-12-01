@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 0,
-			"revision" : 3,
+			"minor" : 1,
+			"revision" : 1,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1218.0, 120.0, 639.0, 803.0 ],
+		"rect" : [ 133.0, 154.0, 1501.0, 929.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -56,8 +56,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "jit_matrix", "" ],
-					"patching_rect" : [ 361.0, 596.0, 354.0, 22.0 ],
-					"text" : "jit.gl.model buildings_node @file SpiralBuilding.fbx @normalize 0"
+					"patching_rect" : [ 361.0, 596.0, 368.0, 22.0 ],
+					"text" : "jit.gl.model buildings_node @file SpiralBuilding01.fbx @normalize 0"
 				}
 
 			}
@@ -116,20 +116,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "jit_matrix", "" ],
-					"patching_rect" : [ 599.0, 73.0, 343.0, 22.0 ],
+					"patching_rect" : [ 594.5, 74.0, 343.0, 22.0 ],
 					"text" : "jit.gl.model buildings_node @file HighRise02.fbx @normalize 0"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-6",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 47.0, 55.0, 93.0, 22.0 ],
-					"text" : "loadmess 0.045"
 				}
 
 			}
@@ -142,31 +130,6 @@
 					"outlettype" : [ "jit_matrix", "" ],
 					"patching_rect" : [ 626.0, 30.0, 307.0, 22.0 ],
 					"text" : "jit.gl.model buildings_node @file Gate.fbx @normalize 0"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"format" : 6,
-					"id" : "obj-26",
-					"maxclass" : "flonum",
-					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "", "bang" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 47.0, 79.0, 203.0, 22.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-23",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "jit_gl_texture", "", "" ],
-					"patching_rect" : [ 47.0, 133.0, 295.0, 22.0 ],
-					"text" : "jit.gl.node scene @name buildings_node @scale 0.02"
 				}
 
 			}
@@ -196,18 +159,6 @@
 			}
 , 			{
 				"box" : 				{
-					"attr" : "scale",
-					"id" : "obj-24",
-					"maxclass" : "attrui",
-					"numinlets" : 1,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 47.0, 103.0, 295.0, 22.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
 					"attr" : "position",
 					"id" : "obj-28",
 					"maxclass" : "attrui",
@@ -221,29 +172,8 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
-					"destination" : [ "obj-23", 0 ],
-					"source" : [ "obj-24", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-24", 0 ],
-					"source" : [ "obj-26", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-5", 0 ],
 					"source" : [ "obj-28", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-26", 0 ],
-					"source" : [ "obj-6", 0 ]
 				}
 
 			}

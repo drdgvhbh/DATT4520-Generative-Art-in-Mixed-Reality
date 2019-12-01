@@ -4,14 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rollup -c rollup.config.js"
+    "build": "max-js-bundler build ./src/index.js --force -o ../patchers/bundle.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "rollup": "^1.27.6",
-    "rollup-plugin-typescript": "^1.0.1",
+    "@types/node": "^12.12.14",
+    "@typescript-eslint/eslint-plugin": "^2.9.0",
+    "@typescript-eslint/parser": "^2.9.0",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "max-js-bundler": "^1.2.0",
+    "prettier": "^1.19.1",
     "tslib": "^1.10.0",
     "typescript": "^3.7.2"
+  },
+  "dependencies": {
+    "core-js": "^3.4.5"
   }
 }
