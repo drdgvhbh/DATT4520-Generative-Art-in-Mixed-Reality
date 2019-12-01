@@ -1,0 +1,328 @@
+
+<jittershader name="default">
+	<description> Default shader </description>
+	<param name="u_ModelMatrix" type="mat4" state="WORLD_MATRIX" />
+	<param name="u_ViewMatrix" type="mat4" state="VIEW_MATRIX" />
+	<param name="u_ViewMatrixInverse" type="mat4" state="VIEW_MATRIX" transform="INVERSE" />
+	<param name="u_viewport" type="vec2" state="VIEWPORT" />
+	<param name="u_camera_position" type="vec3" state="CAMERA_POSITION" />
+	<param name="albedoMap" type="int" default="0" />
+	<param name="normalMap" type="int" default="1" />
+	<param name="metallicMap" type="int" default="2" />
+	<param name="roughnessMap" type="int" default="3" />
+	<param name="aoMap" type="int" default="4" />
+	<param name="irradianceMap" type="int" default="5" />
+	<param name="brdfLUTMap" type="int" default="6" />
+	<language name="glsl" version="1.0">	
+		<program name="vp" type="vertex">
+		<bind param="u_ModelMatrix" program="vp"/>
+		<bind param="u_ViewMatrix" program="fp"/>
+		<bind param="u_ViewMatrixInverse" program="fp"/>
+		<bind param="u_viewport" program="fp"/>
+		<bind param="u_camera_position" program="fp"/>
+		<bind param="albedoMap" program="fp"/>
+		<bind param="normalMap" program="fp"/>
+		<bind param="metallicMap" program="fp"/>
+		<bind param="roughnessMap" program="fp"/>
+		<bind param="aoMap" program="fp"/>
+		<bind param="irradianceMap" program="fp"/>
+		<bind param="brdfLUTMap" program="fp" />
+<![CDATA[
+#version 120
+
+uniform mat4 u_ModelMatrix;
+uniform mat4 u_ViewMatrix;
+
+varying vec3 normal;
+varying vec3 WorldPos;
+varying vec2 texdim0;
+varying vec2 texcoords;
+
+void main (void)
+{
+    // position in object space
+    vec4 P = gl_Vertex;
+	// position in world space
+	vec4 M = u_ModelMatrix * P;
+	// position in eye space
+	vec4 V = u_ViewMatrix * M;
+	// position in clip space
+	vec4 C = gl_ProjectionMatrix * V;
+	// this sets the position on screen	
+	gl_Position = C;
+	// or simply: gl_Position = gl_ProjectionMatrix * a_ViewMatrix * a_ModelMatrix * gl_Vertex; 
+	
+	WorldPos = M.xyz;
+	
+	// object's normal, in world space:		// this gets it in view space; not what we want
+	normal = mat3(u_ModelMatrix) * gl_Normal; //gl_NormalMatrix * gl_Normal;
+	
+	// texture coordinates for each bound texture:
+	gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
+	gl_TexCoord[1] = gl_TextureMatrix[1] * gl_MultiTexCoord1;
+	gl_TexCoord[2] = gl_TextureMatrix[2] * gl_MultiTexCoord2;
+	gl_TexCoord[3] = gl_TextureMatrix[3] * gl_MultiTexCoord3;
+	gl_TexCoord[4] = gl_TextureMatrix[4] * gl_MultiTexCoord4;
+	gl_TexCoord[5] = gl_TextureMatrix[5] * gl_MultiTexCoord5;
+	gl_TexCoord[6] = gl_TextureMatrix[6] * gl_MultiTexCoord6;
+	gl_TexCoord[7] = gl_TextureMatrix[7] * gl_MultiTexCoord7;
+	
+	// normalized texture coordinates:
+	texcoords = gl_MultiTexCoord0.xy;
+	
+	// texture size:
+	texdim0 = vec2 (abs(gl_TextureMatrix[0][0][0]),abs(gl_TextureMatrix[0][1][1]));
+}
+]]>		
+		</program>
+		<program name="fp" type="fragment">
+<![CDATA[
+#version 120
+#extension GL_ARB_texture_rectangle : enable
+#extension GL_EXT_gpu_shader4 : enable
+
+uniform vec2 u_viewport;
+uniform mat4 u_ViewMatrix;
+uniform mat4 u_ViewMatrixInverse;
+
+// material parameters
+uniform sampler2DRect albedoMap;  // 0
+uniform sampler2DRect normalMap;  // 1
+uniform sampler2DRect metallicMap; // 2
+uniform sampler2DRect roughnessMap; // 3
+uniform sampler2DRect aoMap; // 4
+uniform sampler2D irradianceMap; // 5
+uniform sampler2D brdfLUTMap; // 6
+
+uniform vec3 u_camera_position;
+
+// see https://learnopengl.com/PBR/Lighting
+// see https://learnopengl.com/code_viewer_gh.php?code=src/6.pbr/1.2.lighting_textured/1.2.pbr.fs
+
+varying vec3 normal;
+varying vec3 WorldPos;
+varying vec2 texdim0;
+varying vec2 texcoords;
+
+const float PI = 3.14159265359;
+const vec2 invAtan = vec2(0.1591, 0.3183);
+const float MAX_REFLECTION_LOD = 12.0;
+
+//expects normalized ray
+vec4 equirectangular(sampler2D tex, mat4 textureMatrix, vec3 raydir, float lod) {
+	// normalize ray:
+	//vec3 raydir = normalize(ray);
+	// correct to object-space:
+	//raydir = (u_ViewMatrix*vec4(raydir, 1)).xyz;
+	// derive normalized UV coordintates for equirectangular 360 sampling:
+	vec2 uv = vec2(atan(raydir.z, raydir.x), asin(raydir.y)) * invAtan + 0.5;
+	// scale up to texture dim for sampler2DRect:
+	//uv = (textureMatrix * vec4(uv, 0, 1)).xy;
+	// sample texture:
+	return texture2DLod(tex, uv, lod); //, 0.);
+}
+
+
+// ----------------------------------------------------------------------------
+// Easy trick to get tangent-normals to world-space to keep PBR code simplified.
+// Don't worry if you don't get what's going on; you generally want to do normal 
+// mapping the usual way for performance anways; I do plan make a note of this 
+// technique somewhere later in the normal mapping tutorial.
+vec3 getNormalFromMap()
+{
+    //vec3 tangentNormal = texture2DRect(normalMap, TexCoords).xyz * 2.0 - 1.0;
+	vec3 tangentNormal = texture2DRect(normalMap, gl_TexCoord[1].xy).xyz * 2.0 - 1.0;
+	
+	vec3 Q1  = dFdx(WorldPos);
+    vec3 Q2  = dFdy(WorldPos);
+    vec2 st1 = dFdx(texcoords);
+    vec2 st2 = dFdy(texcoords);
+
+    vec3 N   = normalize(normal);
+    vec3 T  = normalize(Q1*st2.t - Q2*st1.t);
+    vec3 B  = -normalize(cross(N, T));
+    mat3 TBN = mat3(T, B, N);
+
+    return normalize(TBN * tangentNormal);
+}
+// ----------------------------------------------------------------------------
+float DistributionGGX(vec3 N, vec3 H, float roughness)
+{
+    float a = roughness*roughness;
+    float a2 = a*a;
+    float NdotH = max(dot(N, H), 0.0);
+    float NdotH2 = NdotH*NdotH;
+
+    float nom   = a2;
+    float denom = (NdotH2 * (a2 - 1.0) + 1.0);
+    denom = PI * denom * denom;
+
+    return nom / denom;
+}
+// ----------------------------------------------------------------------------
+float GeometrySchlickGGX(float NdotV, float roughness)
+{
+    float r = (roughness + 1.0);
+    float k = (r*r) / 8.0;
+
+	//float a = roughness;
+    //float k = (a * a) / 2.0;
+
+    float nom   = NdotV;
+    float denom = NdotV * (1.0 - k) + k;
+
+    return nom / denom;
+}
+// ----------------------------------------------------------------------------
+float GeometrySmith(vec3 N, vec3 V, vec3 L, float roughness)
+{
+    float NdotV = max(dot(N, V), 0.0);
+    float NdotL = max(dot(N, L), 0.0);
+    float ggx2 = GeometrySchlickGGX(NdotV, roughness);
+    float ggx1 = GeometrySchlickGGX(NdotL, roughness);
+
+    return ggx1 * ggx2;
+}
+// ----------------------------------------------------------------------------
+vec3 fresnelSchlick(float cosTheta, vec3 F0)
+{
+    return F0 + (1.0 - F0) * pow(1.0 - cosTheta, 5.0);
+}
+vec3 fresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness)
+{
+    return F0 + (max(vec3(1.0 - roughness), F0) - F0) * pow(1.0 - cosTheta, 5.0);
+} 
+// ----------------------------------------------------------------------------
+
+
+void main()
+{	
+//	gl_FragColor = gl_Color;
+//	gl_FragColor = vec4(normal*0.5+0.5, 1);
+//	gl_FragColor = vec4(pos.xyz*0.5+0.5, 1);
+//	gl_FragColor = gl_TexCoord[1];	
+//	gl_FragColor = texture2DRect(albedoMap, gl_TexCoord[0].xy);
+//	gl_FragColor = texture2DRect(normalMap, gl_TexCoord[1].xy);
+//	gl_FragColor = texture2DRect(metallicMap, gl_TexCoord[2].xy);
+//	gl_FragColor = texture2DRect(roughnessMap, gl_TexCoord[3].xy);
+//	gl_FragColor = texture2DRect(aoMap, gl_TexCoord[4].xy);
+	
+	vec3 albedo     = pow(texture2DRect(albedoMap, gl_TexCoord[0].xy).rgb, vec3(2.2));
+    float metallic  = texture2DRect(metallicMap, gl_TexCoord[2].xy).g;
+    float roughness = texture2DRect(roughnessMap, gl_TexCoord[3].xy).r;
+    float ao        = texture2DRect(aoMap, gl_TexCoord[4].xy).r;
+
+	vec3 camPos = u_camera_position;
+	// texture-adjusted normal in world space
+ 	vec3 N = getNormalFromMap();
+	//gl_FragColor = vec4(N, 1.);
+
+	// outgoing vector from surface to eye, world space
+    vec3 V = normalize(camPos - WorldPos);
+	//gl_FragColor = vec4(V, 1.);
+	vec3 R = reflect(-V, N);
+	
+    // calculate reflectance at normal incidence; if dia-electric (like plastic) use F0 
+    // of 0.04 and if it's a metal, use the albedo color as F0 (metallic workflow)    
+    vec3 F0 = vec3(0.04); 
+    F0 = mix(F0, albedo, metallic);
+	
+	// reflectance equation
+    vec3 Lo = vec3(0.0);
+	int i=0;
+	for(int i = 0; i < 8; ++i) 
+    {
+        // want it in world space:
+		// but gl_LightSource[i].position is in view space :-(
+		vec3 lightPos = (u_ViewMatrixInverse * gl_LightSource[i].position).xyz;
+		//gl_FragColor = vec4(lightPos, 1.);
+		
+        vec3 lightColor = gl_LightSource[i].diffuse.rgb;
+
+
+		// incoming vector from light to surface, world space
+        vec3 L = normalize(lightPos - WorldPos);
+		// halfvector between incoming and outgoing rays
+        vec3 H = normalize(V + L);
+		// similarity of light vector & normal vector
+        float NdotL = max(dot(N, L), 0.0);   
+
+		// calculate per-light radiance
+        float distance = length(lightPos - WorldPos);
+        float attenuation = 1.0 / (distance * distance);
+        vec3 radiance = lightColor * attenuation;
+
+        // Cook-Torrance BRDF
+        float NDF = DistributionGGX(N, H, roughness);   
+        float G   = GeometrySmith(N, V, L, roughness);      
+        vec3 F    = fresnelSchlick(max(dot(H, V), 0.0), F0);
+        //vec3 F    = fresnelSchlick(abs(dot(H, V)), F0);
+           
+        vec3 nominator    = NDF * G * F; 
+        float denominator = 4.0 * max(dot(N, V), 0.0) * NdotL + 0.001; // 0.001 to prevent divide by zero.
+        vec3 specular = nominator / denominator;
+
+        // kS is equal to Fresnel
+        vec3 kS = F;
+        // for energy conservation, the diffuse and specular light can't
+        // be above 1.0 (unless the surface emits light); to preserve this
+        // relationship the diffuse component (kD) should equal 1.0 - kS.
+        vec3 kD = vec3(1.0) - kS;
+        // multiply kD by the inverse metalness such that only non-metals 
+        // have diffuse lighting, or a linear blend if partly metal (pure metals
+        // have no diffuse light).
+        kD *= 1.0 - metallic;	  
+
+        // scale light by NdotL     
+
+        // add to outgoing radiance Lo
+        // note that we already multiplied the BRDF by the Fresnel (kS) so we won't multiply by kS again
+		Lo += (kD * (albedo / PI) + specular) * radiance * NdotL;  
+    }  
+
+	
+	// ambient lighting from environment map:
+	//vec3 ambient = equirectangular(irradianceMap, 
+	//	gl_TextureMatrix[5], 
+	///	normalize(N), 
+	//	roughness * 8.).rgb;
+	vec3 kS = fresnelSchlickRoughness(max(dot(N, V), 0.0), F0, roughness);
+	vec3 kD = vec3(1.0) - kS;
+    kD *= 1.0 - metallic;	
+
+	vec3 irradiance = equirectangular(irradianceMap, 
+		gl_TextureMatrix[5], 
+		normalize(N), 
+		MAX_REFLECTION_LOD).rgb;
+	vec3 diffuse    = irradiance * albedo;
+	
+	// IBL specular:
+	vec3 prefilteredColor = equirectangular(irradianceMap, 
+		gl_TextureMatrix[5], 
+		normalize(R), 
+		roughness * MAX_REFLECTION_LOD).rgb;
+	vec2 envBRDF  = texture2D(brdfLUTMap, vec2(max(dot(N, V), 0.0), roughness)).rg;
+	//vec3 specular = prefilteredColor * (kS * envBRDF.x + envBRDF.y);
+	vec3 specular = prefilteredColor * (kS);
+	
+
+
+	vec3 ambient    = (kD * diffuse + specular) * ao; 
+
+	
+ 
+    vec3 color = ambient + Lo;
+
+    // HDR tonemapping
+    color = color / (color + vec3(1.0));
+    // gamma correct
+    color = pow(color, vec3(1.0/2.2)); 
+
+    gl_FragColor = vec4(color, 1.0);
+
+	//gl_FragColor = equirectangular(irradianceMap, gl_TextureMatrix[5], R, roughness * 8.);
+} 
+]]>
+		</program>
+	</language>
+</jittershader>

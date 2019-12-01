@@ -1,0 +1,12 @@
+# Blender MTL File: 'jeepuv.blend'
+# Material Count: 1
+
+newmtl Material.003
+Ns 575.999996
+Ka 1.000000 1.000000 1.000000
+Kd 0.013411 0.013411 0.027696
+Ks 1.000000 1.000000 1.000000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
