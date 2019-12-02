@@ -16,6 +16,7 @@ export const config = {
    *  nodeName: string,
    *  fileName: string,
    *  positions: number[][],
+   *  rotations?: number[][],
    *  normalize?: number
    *  texture?: string
    * }>}
@@ -132,6 +133,7 @@ export const config = {
       nodeName: 'sign_node',
       fileName: 'Sign_road.obj',
       positions: [[1.83, 1, -2]],
+      rotations: [[0, 88, 0]],
       normalize: 0,
       texture: 'finalEffect1',
     },
@@ -139,6 +141,7 @@ export const config = {
       nodeName: 'sign_node',
       fileName: 'Sign_round.obj',
       positions: [[-1.5, 1, 2]],
+      rotations: [[0, -237, 0]],
       normalize: 0,
       texture: 'finalEffect1',
     },
@@ -146,6 +149,7 @@ export const config = {
       nodeName: 'sign_node',
       fileName: 'Sign_one_way.obj',
       positions: [[-2.18, 1, 2.91]],
+      rotations: [[0, -137, 0]],
       normalize: 0,
       texture: 'finalEffect1',
     },
@@ -153,6 +157,7 @@ export const config = {
       nodeName: 'sign_node',
       fileName: 'Sign_traffic_light.obj',
       positions: [[1.25, 1, 1.625]],
+      rotations: [[0, -129, 0]],
       normalize: 0,
       texture: 'finalEffect1',
     },

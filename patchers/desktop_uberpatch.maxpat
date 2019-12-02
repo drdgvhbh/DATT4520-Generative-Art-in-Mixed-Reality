@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1119.0, 362.0, 310.0, 152.0 ],
+		"rect" : [ 1119.0, 362.0, 471.0, 348.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -39,34 +39,23 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-4",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patching_rect" : [ 141.0, 187.0, 54.0, 22.0 ],
+					"text" : "spawner"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-9",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
 					"patching_rect" : [ 137.0, 23.0, 141.0, 22.0 ],
 					"text" : "DecontaminationHallway"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-8",
-					"maxclass" : "newobj",
-					"numinlets" : 0,
-					"numoutlets" : 0,
-					"patching_rect" : [ 163.0, 47.0, 117.0, 22.0 ],
-					"text" : "Green_Scene_More"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-7",
-					"maxclass" : "newobj",
-					"numinlets" : 0,
-					"numoutlets" : 0,
-					"patching_rect" : [ 143.0, 80.0, 37.0, 22.0 ],
-					"text" : "signs"
 				}
 
 			}
@@ -89,17 +78,6 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 19.0, 107.0, 103.0, 22.0 ],
 					"text" : "skyscraper-scene"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"id" : "obj-4",
-					"maxclass" : "newobj",
-					"numinlets" : 0,
-					"numoutlets" : 0,
-					"patching_rect" : [ 19.0, 143.0, 56.0, 22.0 ],
-					"text" : "buildings"
 				}
 
 			}
@@ -168,13 +146,6 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "buildings.maxpat",
-				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "skyscraper-scene.maxpat",
 				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
 				"patcherrelativepath" : ".",
@@ -189,24 +160,17 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "signs.maxpat",
+				"name" : "spawner.maxpat",
 				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "Green_Scene_More.maxpat",
+				"name" : "bundle.js",
 				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
 				"patcherrelativepath" : ".",
-				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "DecontaminationHallway.maxpat",
-				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
+				"type" : "TEXT",
 				"implicit" : 1
 			}
  ],

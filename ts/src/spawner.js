@@ -43,7 +43,14 @@ export function spawn() {
         return;
       }
       const modelname = entry[0];
-      const { nodeName, fileName, normalize, texture, positions } = entry[1];
+      const {
+        nodeName,
+        fileName,
+        normalize,
+        texture,
+        positions,
+        rotations,
+      } = entry[1];
 
       /**
        * @type {(number | string)[]}
@@ -77,11 +84,12 @@ export function spawn() {
         75 + 100 * (i + 1),
         'jit.gl.multiple',
         nodeName,
-        1,
+        2,
         '@targetname',
         modelname,
         '@glparams',
         'position',
+        'rotatexyz',
       );
 
       const positionMatrix = new JitterMatrix(
@@ -95,10 +103,27 @@ export function spawn() {
           positionMatrix.setcell([i, 0], 'plane', j, 'val', positions[i][j]);
         }
       }
-      // tmpPatcher.connect(positionMatrix, 0, multiple, 0);
+
       tmpPatcher.connect(this.box, 0, multiple, 0);
       outlet(0, 'jit_matrix', positionMatrix.name);
       tmpPatcher.disconnect(this.box, 0, multiple, 0);
+
+      if (rotations) {
+        const rotationMatrix = new JitterMatrix(
+          3,
+          'float32',
+          positions.length,
+          1,
+        );
+        for (let i = 0; i < rotations.length; i++) {
+          for (let j = 0; j < rotations[i].length; j++) {
+            rotationMatrix.setcell([i, 0], 'plane', j, 'val', rotations[i][j]);
+          }
+        }
+        tmpPatcher.connect(this.box, 0, multiple, 1);
+        outlet(0, 'jit_matrix', rotationMatrix.name);
+        tmpPatcher.disconnect(this.box, 0, multiple, 1);
+      }
 
       i += 1;
     },
