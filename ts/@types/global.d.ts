@@ -8,7 +8,7 @@ declare global {
     constructor(task: (...args: any[]) => void, object: any, ...args: any[]);
     interval: number;
     cancel: () => void;
-    repeat: (times: number) => void;
+    repeat: (times: number, delay?: number) => void;
   }
 
   export class MaxObj {

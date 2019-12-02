@@ -1,8 +1,7 @@
 export const config = {
   buildings: {
     nodeName: 'buildings_node',
-    scale: 0.045,
-    loadingInterval: 1000,
+    scale: 0.0045,
     models: [
       'HighRise01.fbx',
       'HighRise02.fbx',

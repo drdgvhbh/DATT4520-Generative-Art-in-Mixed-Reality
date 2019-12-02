@@ -20,28 +20,19 @@ export function spawn_buildings() {
     config.buildings.scale,
   );
 
-  let i = 1;
   const { models } = config.buildings;
-  const task = new Task(
-    () => {
-      tmpPatcher.newdefault(
-        20,
-        10 + 100 * i,
-        'jit.gl.model',
-        config.buildings.nodeName,
-        '@file',
-        models.pop(),
-        '@normalize',
-        0,
-      );
-      i += 1;
-    },
-    this,
-    tmpPatcher,
-    config,
-  );
-  task.interval = config.buildings.loadingInterval;
-  task.repeat(models.length);
+  models.forEach((model, i) => {
+    tmpPatcher.newdefault(
+      20,
+      10 + 100 * (i + 1),
+      'jit.gl.model',
+      config.buildings.nodeName,
+      '@file',
+      model,
+      '@normalize',
+      0,
+    );
+  });
 }
 
 /**

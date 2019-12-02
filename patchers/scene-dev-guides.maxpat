@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 0,
-			"revision" : 8,
+			"minor" : 1,
+			"revision" : 1,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 853.0, 500.0, 811.0, 534.0 ],
+		"rect" : [ 720.0, 325.0, 811.0, 534.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -71,8 +71,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 0,
-							"revision" : 8,
+							"minor" : 1,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -459,8 +459,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "jit_gl_texture", "", "" ],
-					"patching_rect" : [ 15.0, 318.0, 472.0, 22.0 ],
-					"text" : "jit.gl.node guides @name kinect @rotatexyz -34.46 -43.5 0.83 @position -3.6 3.854 3.5"
+					"patching_rect" : [ 15.0, 318.0, 534.0, 22.0 ],
+					"text" : "jit.gl.node guides @name kinect @rotatexyz -34.46 -43.5 0.83 @position -3.6 3.854 3.5 @enable 0"
 				}
 
 			}

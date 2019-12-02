@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 989.0, 621.0, 310.0, 152.0 ],
+		"rect" : [ 1119.0, 362.0, 310.0, 152.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -39,11 +39,33 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-6",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patching_rect" : [ 132.0, 107.0, 67.0, 22.0 ],
+					"text" : "jeep-scene"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-3",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patching_rect" : [ 19.0, 107.0, 103.0, 22.0 ],
+					"text" : "skyscraper-scene"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-4",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 19.0, 139.0, 56.0, 22.0 ],
+					"patching_rect" : [ 19.0, 143.0, 56.0, 22.0 ],
 					"text" : "buildings"
 				}
 
@@ -114,6 +136,27 @@
 			}
 , 			{
 				"name" : "buildings.maxpat",
+				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "bundle.js",
+				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "skyscraper-scene.maxpat",
+				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "jeep-scene.maxpat",
 				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
