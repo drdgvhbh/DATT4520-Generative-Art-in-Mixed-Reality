@@ -39,6 +39,17 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-8",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patching_rect" : [ 163.0, 47.0, 117.0, 22.0 ],
+					"text" : "Green_Scene_More"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-7",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -168,6 +179,13 @@
 			}
 , 			{
 				"name" : "signs.maxpat",
+				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "Green_Scene_More.maxpat",
 				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
