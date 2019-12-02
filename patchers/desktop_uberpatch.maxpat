@@ -39,6 +39,17 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-9",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 0,
+					"patching_rect" : [ 137.0, 23.0, 141.0, 22.0 ],
+					"text" : "DecontaminationHallway"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-8",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -186,6 +197,13 @@
 			}
 , 			{
 				"name" : "Green_Scene_More.maxpat",
+				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "DecontaminationHallway.maxpat",
 				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",

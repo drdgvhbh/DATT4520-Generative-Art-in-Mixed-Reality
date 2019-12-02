@@ -1,1 +1,1 @@
-export * from './buildings';
+export * from './spawner';
