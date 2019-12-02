@@ -7,6 +7,9 @@ export const config = {
     grass_node: {
       scale: 0.8,
     },
+    sign_node: {
+      scale: 1.0,
+    },
   },
   /**
    * @type {Record<string, {
@@ -91,14 +94,14 @@ export const config = {
       nodeName: 'grass_node',
       fileName: 'cao5.obj',
       positions: [
-        [2.25, 1, 5.25],
-        [1.968, 1, 5.56],
+        [2.25, 1, 3.93],
+        [1.968, 1, 2.78],
         [1.125, 1, 4.77],
         [3.99, 1, -4.69],
-        [5.74, 1, 4.7425],
+        [4.3, 1, 4.7425],
         [-6.87, 1, 4.69],
         [-4.04, 1, 4.6],
-        [-5.35, 1, 4.7],
+        [-4.35, 1, 4.7],
       ],
       normalize: 0,
       texture: 'bark3',
@@ -118,6 +121,41 @@ export const config = {
       normalize: 0,
       texture: 'bark3',
     },
+    signStop: {
+      nodeName: 'sign_node',
+      fileName: 'Sign_stop.obj',
+      positions: [[-1.25, 1, -1.5]],
+      normalize: 0,
+      texture: 'finalEffect2',
+    },
+    signRoad: {
+      nodeName: 'sign_node',
+      fileName: 'Sign_road.obj',
+      positions: [[1.83, 1, -2]],
+      normalize: 0,
+      texture: 'finalEffect1',
+    },
+    signRound: {
+      nodeName: 'sign_node',
+      fileName: 'Sign_round.obj',
+      positions: [[-1.5, 1, 2]],
+      normalize: 0,
+      texture: 'finalEffect1',
+    },
+    signOneWay: {
+      nodeName: 'sign_node',
+      fileName: 'Sign_one_way.obj',
+      positions: [[-2.18, 1, 2.91]],
+      normalize: 0,
+      texture: 'finalEffect1',
+    },
+    signTrafficLight: {
+      nodeName: 'sign_node',
+      fileName: 'Sign_traffic_light.obj',
+      positions: [[1.25, 1, 1.625]],
+      normalize: 0,
+      texture: 'finalEffect1',
+    },
   },
   textures: {
     bark3: {
@@ -125,6 +163,12 @@ export const config = {
     },
     leafs3: {
       fileName: 'leafs3.png',
+    },
+    finalEffect2: {
+      fileName: 'Final_effect_2.jpg',
+    },
+    finalEffect1: {
+      fileName: 'Final_effect_1.jpg',
     },
   },
 };
