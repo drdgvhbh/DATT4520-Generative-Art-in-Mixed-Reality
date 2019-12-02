@@ -1,5 +1,5 @@
 export const config = {
-  spawnInterval: 1000,
+  spawnInterval: 6000,
   nodes: {
     trees_node: {
       scale: 1.0,
@@ -10,6 +10,9 @@ export const config = {
     sign_node: {
       scale: 1.0,
     },
+    building_node: {
+      scale: 1.5,
+    }
   },
   /**
    * @type {Record<string, {
@@ -23,46 +26,46 @@ export const config = {
    */
   models: {
     highrise01: {
-      nodeName: 'scene',
+      nodeName: 'building_node',
       fileName: 'HighRise01.fbx',
       positions: [
-        [-1, 1, 0],
-        [-1, 1, 0.7],
-        [-1, 1, 1.5],
+        [-0.66, 1, 0],
+        [-0.66, 1, 0.4666],
+        [-0.66, 1, 1],
       ],
     },
     highrise03: {
-      nodeName: 'scene',
+      nodeName: 'building_node',
       fileName: 'HighRise03.fbx',
-      positions: [[0, 1, -1]],
+      positions: [[0, 1, -0.66]],
     },
     highrise05: {
-      nodeName: 'scene',
+      nodeName: 'building_node',
       fileName: 'HighRise05.fbx',
-      positions: [[-2.5, 1, 1]],
+      positions: [[-1.66, 1, 0.66]],
     },
     spiralBuilding01: {
-      nodeName: 'scene',
+      nodeName: 'building_node',
       fileName: 'SpiralBuilding01.fbx',
-      positions: [[-3, 1, 2]],
+      positions: [[-2, 1, 1.33]],
     },
     spiralBuilding02: {
-      nodeName: 'scene',
+      nodeName: 'building_node',
       fileName: 'HighRise02.fbx',
-      positions: [[-3, 1, 0]],
+      positions: [[-2, 1, 0]],
     },
     oldBuilding: {
-      nodeName: 'scene',
+      nodeName: 'building_node',
       fileName: 'OldBuilding.fbx',
-      positions: [[2, 1, 0]],
+      positions: [[1.33, 1, 0]],
     },
     highrise04: {
-      nodeName: 'scene',
+      nodeName: 'building_node',
       fileName: 'HighRise04.fbx',
       positions: [
-        [3, 1, 1],
-        [3, 1, -1],
-        [3, 1, 0],
+        [2, 1, 0.66],
+        [2, 1, -0.66],
+        [2, 1, 0],
       ],
     },
     tree3a_lod2: {

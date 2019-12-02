@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 1,
+			"revision" : 0,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -74,13 +74,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-35",
-					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 613.0, 258.0, 210.0, 36.0 ],
-					"text" : "position -0.348824 3.560936 -5.027747"
+					"patching_rect" : [ 613.0, 258.0, 210.0, 22.0 ],
+					"text" : "position 0. 1.5 8."
 				}
 
 			}
@@ -120,7 +119,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 1,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -460,11 +459,11 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-9",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "bang" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 631.0, 354.0, 30.0, 30.0 ]
 				}
 
@@ -956,7 +955,15 @@
 				}
 
 			}
- ]
+ ],
+		"dependency_cache" : [ 			{
+				"name" : "jit.gl.slab.gauss6x.maxpat",
+				"bootpath" : "~/AppData/Roaming/Cycling '74/Max 8/examples/jitter-examples/render/slab",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0
 	}
 
 }

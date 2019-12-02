@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 1,
+			"revision" : 0,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -238,11 +238,11 @@
 					"patching_rect" : [ 642.0, 145.0, 100.0, 40.0 ],
 					"preset_data" : [ 						{
 							"number" : 1,
-							"data" : [ 5, "obj-70", "flonum", "float", 3.3, 5, "obj-65", "flonum", "float", 3.3, 5, "obj-11", "flonum", "float", 0.0, 5, "obj-52", "flonum", "float", 2.0, 5, "obj-20", "flonum", "float", 2.001, 5, "obj-28", "flonum", "float", 2.0, 5, "obj-73", "flonum", "float", 13.0, 5, "obj-81", "flonum", "float", 1.0, 5, "obj-33", "flonum", "float", 13.0, 5, "obj-83", "flonum", "float", 1.0, 5, "obj-82", "flonum", "float", 1.0, 5, "obj-21", "flonum", "float", 0.3, 5, "obj-22", "flonum", "float", 0.2, 5, "obj-53", "flonum", "float", 0.048 ]
+							"data" : [ 5, "obj-70", "flonum", "float", 3.3, 5, "obj-65", "flonum", "float", 3.3, 5, "obj-11", "flonum", "float", 0.0, 5, "obj-52", "flonum", "float", 2.0, 5, "obj-20", "flonum", "float", 2.001, 5, "obj-28", "flonum", "float", 2.0, 5, "obj-73", "flonum", "float", 13.0, 5, "obj-81", "flonum", "float", 1.0, 5, "obj-33", "flonum", "float", 13.0, 5, "obj-83", "flonum", "float", 1.0, 5, "obj-82", "flonum", "float", 1.0, 5, "<invalid>", "flonum", "float", 0.3, 5, "obj-22", "flonum", "float", 0.2, 5, "obj-53", "flonum", "float", 0.048 ]
 						}
 , 						{
 							"number" : 2,
-							"data" : [ 5, "obj-70", "flonum", "float", 12.0, 5, "obj-65", "flonum", "float", 12.0, 5, "obj-11", "flonum", "float", 0.17, 5, "obj-52", "flonum", "float", 12.0, 5, "obj-20", "flonum", "float", 3.0, 5, "obj-28", "flonum", "float", 3.0, 5, "obj-73", "flonum", "float", 26.0, 5, "obj-81", "flonum", "float", 0.925, 5, "obj-33", "flonum", "float", 26.0, 5, "obj-83", "flonum", "float", 1.001, 5, "obj-82", "flonum", "float", 1.0, 5, "obj-21", "flonum", "float", 0.3, 5, "obj-22", "flonum", "float", 0.13, 5, "obj-53", "flonum", "float", 0.213 ]
+							"data" : [ 5, "obj-70", "flonum", "float", 12.0, 5, "obj-65", "flonum", "float", 12.0, 5, "obj-11", "flonum", "float", 0.17, 5, "obj-52", "flonum", "float", 12.0, 5, "obj-20", "flonum", "float", 3.0, 5, "obj-28", "flonum", "float", 3.0, 5, "obj-73", "flonum", "float", 26.0, 5, "obj-81", "flonum", "float", 0.925, 5, "obj-33", "flonum", "float", 26.0, 5, "obj-83", "flonum", "float", 1.001, 5, "obj-82", "flonum", "float", 1.0, 5, "<invalid>", "flonum", "float", 0.3, 5, "obj-22", "flonum", "float", 0.13, 5, "obj-53", "flonum", "float", 0.213 ]
 						}
  ]
 				}
@@ -276,7 +276,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 1,
-							"revision" : 1,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1096,15 +1096,13 @@
 			}
 , 			{
 				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 11.595186999999999,
+					"comment" : "",
 					"id" : "obj-27",
-					"maxclass" : "newobj",
+					"index" : 1,
+					"maxclass" : "outlet",
 					"numinlets" : 1,
-					"numoutlets" : 2,
-					"outlettype" : [ "jit_matrix", "" ],
-					"patching_rect" : [ 76.0, 621.0, 238.0, 22.0 ],
-					"text" : "jit.gl.videoplane desktop @transform_reset 2"
+					"numoutlets" : 0,
+					"patching_rect" : [ 76.0, 621.0, 30.0, 30.0 ]
 				}
 
 			}
@@ -1145,7 +1143,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 318.0, 79.0, 167.0, 36.0 ],
-					"text" : "position 1.267798 1.746567 3.309763"
+					"text" : "quat 0.825592 0.222085 0.277265 -0.438407"
 				}
 
 			}
@@ -1169,19 +1167,20 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 76.0, 79.0, 167.0, 22.0 ],
-					"text" : "jit_gl_texture u863005539"
+					"text" : "jit_gl_texture u789004209"
 				}
 
 			}
 , 			{
 				"box" : 				{
+					"comment" : "",
 					"id" : "obj-21",
-					"maxclass" : "newobj",
+					"index" : 1,
+					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 46.0, 24.0, 92.0, 22.0 ],
-					"text" : "r effects-texture"
+					"patching_rect" : [ 46.0, 24.0, 30.0, 30.0 ]
 				}
 
 			}

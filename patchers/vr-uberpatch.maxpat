@@ -4,13 +4,13 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 1,
-			"revision" : 1,
+			"revision" : 0,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 715.0, 539.0, 310.0, 241.0 ],
+		"rect" : [ 2117.0, 303.0, 424.0, 314.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -38,17 +38,6 @@
 		"style" : "",
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
-				"box" : 				{
-					"id" : "obj-3",
-					"maxclass" : "newobj",
-					"numinlets" : 0,
-					"numoutlets" : 0,
-					"patching_rect" : [ 107.0, 177.0, 92.0, 22.0 ],
-					"text" : "camera-effect-1"
-				}
-
-			}
-, 			{
 				"box" : 				{
 					"id" : "obj-7",
 					"maxclass" : "newobj",
@@ -113,7 +102,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 19.0, 121.0, 103.0, 22.0 ],
+					"patching_rect" : [ 47.0, 202.0, 103.0, 22.0 ],
 					"text" : "scene-dev-guides"
 				}
 
@@ -148,51 +137,57 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "vr-scene.maxpat",
-				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
+				"bootpath" : "D:/DATT4520-Generative-Art-in-Mixed-Reality/patchers",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "jit.gl.slab.gauss6x.maxpat",
+				"bootpath" : "~/AppData/Roaming/Cycling '74/Max 8/examples/jitter-examples/render/slab",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "camera-effect-1.maxpat",
+				"bootpath" : "D:/DATT4520-Generative-Art-in-Mixed-Reality/patchers",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "scene-dev-guides.maxpat",
-				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
+				"bootpath" : "D:/DATT4520-Generative-Art-in-Mixed-Reality/patchers",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "skyscraper-scene.maxpat",
-				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
+				"bootpath" : "D:/DATT4520-Generative-Art-in-Mixed-Reality/patchers",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "jeep-scene.maxpat",
-				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
+				"bootpath" : "D:/DATT4520-Generative-Art-in-Mixed-Reality/patchers",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "spawner.maxpat",
-				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
+				"bootpath" : "D:/DATT4520-Generative-Art-in-Mixed-Reality/patchers",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "bundle.js",
-				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
+				"bootpath" : "D:/DATT4520-Generative-Art-in-Mixed-Reality/patchers",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "camera-effect-1.maxpat",
-				"bootpath" : "~/Documents/School/this-class-sucks/patchers",
-				"patcherrelativepath" : ".",
-				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
